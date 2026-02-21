@@ -2,6 +2,31 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        createLogin loginUser = new createLogin();
+        loginUser.setUsername();
+        String nameUser = loginUser.getUsername();
+        loginUser.setCPF();
+        loginUser.setDateBorn();
+        loginUser.setPassword();
+
+
+        try {
+            System.out.println("Criando sua conta... Aguarde um instante ");
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            System.err.println("Opa, o delay foi interrompido!");
+        }
+
+        System.out.println("Olá " + nameUser + " Seja Bem-Vindo!");
+
+        try {
+            System.out.println("Acessando sua conta...");
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.err.println("Opa, o delay foi interrompido!");
+        }
+
         account minhaconta = new account();
 
         System.out.println("------------Banco XYZ-------------");
@@ -50,12 +75,5 @@ public class Main {
                     break;
             }
         }
-
-
-
-
-
-
-
     }
 }
