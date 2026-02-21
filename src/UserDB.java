@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDB {
@@ -22,9 +23,34 @@ public class UserDB {
             System.out.println("Erro ao salvar no banco: " + e.getMessage());
         }
 
-
-
     }
+
+    public int verificarLogin(String cpfDigitado, String senhaDigitada){
+        String sql = "SELECT password FROM users WHERE cpf = ?";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cpfDigitado);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                String senhaNoBanco = rs.getString("password");
+
+                if (senhaNoBanco.equals(senhaDigitada)) {
+                    return 0; // Deu bom!
+                } else {
+                    return 2; // Senha errada
+                }
+            } else {
+                return 1;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao salvar no banco: " + e.getMessage());
+            return 3;
+        }
+    }
+
 }
 
 
