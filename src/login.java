@@ -25,6 +25,7 @@ public class login {
             return false;
         } else if (resultado == 2) {
             System.out.println("❌ Erro: Senha incorreta.");
+
             return false;
         } else{
             System.out.println("⚠️ Erro de conexão com o banco.");
@@ -32,4 +33,5 @@ public class login {
         }
 
     }
+
 }

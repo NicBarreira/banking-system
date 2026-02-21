@@ -22,17 +22,40 @@ public class Main {
             opcaoConta = sc.nextInt();
             switch (opcaoConta) {
                 case 1:
-                    login telalogin = new login();
-                    if(telalogin.confirmacao()){
-                        account minhaconta = new account();
-                        minhaconta.exibirMenuInterno(sc);
+                    int tentativas = 0;
+                    boolean logado = false;
+
+                    while(tentativas < 3 && !logado) {
+                        login telalogin = new login();
+                        logado = telalogin.confirmacao();
+
+
+                    if(!logado){
+                        tentativas++;
+                        System.out.println(tentativas + " de 3 tentativas");
                     }
+                    }
+
                     try {
                         System.out.println("Acessando sua conta...");
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         System.err.println("Opa, o delay foi interrompido!");
                     }
+
+                    if(tentativas == 3){
+                        System.out.println("ACESSO BLOQUEADO!");
+                    } else if(logado){
+                        try {
+                            System.out.println("Acessando sua conta...");
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            System.err.println("Opa, o delay foi interrompido!");
+                        }
+                        account minhaconta = new account();
+                        minhaconta.exibirMenuInterno(sc);
+                    }
+
                     break;
                 case 2:
                     createLogin loginUser = new createLogin();
