@@ -3,6 +3,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class createLogin {
     Scanner sc = new Scanner(System.in);
@@ -14,9 +18,19 @@ public class createLogin {
     public String getUsername() {
         return username;
     }
+
+    public String getCPF() {
+        return cpf;
+    }
+
     public LocalDate getBorn() {
         return born;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
 
 
     public void setUsername() {

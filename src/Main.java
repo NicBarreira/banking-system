@@ -1,6 +1,15 @@
+import java.sql.Connection;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        Connection conn = DatabaseConnection.getConnection();
+
+        if(conn != null){
+            System.out.println("CONECTADO COM SUCESSO AO BANCO!");
+        } else{
+            System.out.println("Falha na ignição do banco.");
+        }
+
         Scanner sc = new Scanner(System.in);
 
         createLogin loginUser = new createLogin();
@@ -10,6 +19,9 @@ public class Main {
         loginUser.setDateBorn();
         loginUser.setPassword();
 
+        // 3. Chamamos o "Gerente do Banco" para salvar
+        UserDB db = new UserDB();
+        db.newUser(loginUser);
 
         try {
             System.out.println("Criando sua conta... Aguarde um instante ");
@@ -54,7 +66,6 @@ public class Main {
             } catch (InterruptedException e) {
                 System.err.println("Opa, o delay foi interrompido!");
             }
-
 
             switch (opcao) {
                 case 1:
