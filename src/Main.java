@@ -25,6 +25,8 @@ public class Main {
                     int tentativas = 0;
                     boolean logado = false;
 
+                    resetPassword newPassword = new resetPassword();
+
                     while(tentativas < 3 && !logado) {
                         login telalogin = new login();
                         logado = telalogin.confirmacao();
@@ -36,15 +38,17 @@ public class Main {
                     }
                     }
 
-                    try {
-                        System.out.println("Acessando sua conta...");
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        System.err.println("Opa, o delay foi interrompido!");
-                    }
-
                     if(tentativas == 3){
-                        System.out.println("ACESSO BLOQUEADO!");
+                        System.out.println("Senha incorreta");
+                        try {
+                            System.out.println("Iniciando sistema de redefinição de senha...");
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            System.err.println("Opa, o delay foi interrompido!");
+                        }
+
+                        newPassword.verify();
+
                     } else if(logado){
                         try {
                             System.out.println("Acessando sua conta...");
